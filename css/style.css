@@ -19,6 +19,12 @@ body {
 
 }
 
+.buttons {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 4;
+}
+
 .output, .operations,
 .high-nums, .mid-nums, .low-nums {
     display: flex;
