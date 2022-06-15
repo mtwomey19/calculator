@@ -19,28 +19,31 @@ let output = 0;
 
 function decipherClicks(className, id) {
     let screen = document.getElementById('output');
+
     if (className !== 'op' && operation.length === 0) {
         num1 += document.querySelector(`#${id}`).textContent;
         screen.innerText = num1;
-    } if (num1 !== '' && className === 'op' && id !== 'equal') {
+    } 
+    if (num1 !== '' && className === 'op' && id !== 'equal') {
         operation.push(document.querySelector(`#${id}`).textContent);
-    } if (className !== 'op' && operation.length !== 0) {
+    } 
+    if (className !== 'op' && operation.length !== 0) {
         num2 += document.querySelector(`#${id}`).textContent;
         screen.textContent = num2;
-    } if (id === 'equal' && num2 !== '') {
+    } 
+    if ((id === 'equal' && num2 !== '') || (num1 !== '' && num2 !== '' && className === 'op')) {
         output = operate(operation[0], num1, num2);
         screen.textContent = output;
         num1 = output;
         operation.shift(); 
         num2 = '';
-    } if (num1 !== '' && num2 !== '' && className === 'op') {
-        console.log(operation[0]);
-        output = operate(operation[0], num1, num2);
-        screen.textContent = output;
-        num1 = output;
-        operation.shift();
-        num2 = ''
-    } 
+    } if (id === 'clear') {
+        num1 = '';
+        num2 = '';
+        operation = [];
+        output = 0;
+        screen.textContent = '';
+    }
 }
 
 function operate(operation, a, b) {
@@ -66,7 +69,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    return (Math.round((a / b) * 10_000)) / 10_000;
 }
 
 

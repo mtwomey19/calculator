@@ -22,12 +22,13 @@ body {
 .buttons {
     display: flex;
     flex-direction: column;
-    flex-grow: 4;
+    flex: 1;
 }
 
 .output, .operations,
-.high-nums, .mid-nums, .low-nums {
+.high-nums, .mid-nums, .low-nums, .zero-row {
     display: flex;
+    height: 100px;
 }
 
 .nums-container {
@@ -36,18 +37,14 @@ body {
     flex: 3;
 }
 
-.output, .operations {
-    flex: 1;
-}
-
 .output p, .operations button,
-.high-nums button, .mid-nums button, .low-nums button {
+.high-nums button, .mid-nums button, .low-nums button, .zero-row button {
     flex: auto;
     border: 1px solid black;
     text-align: center;
 }
 
-.high-nums, .mid-nums, .low-nums {
+.high-nums, .mid-nums, .low-nums, .zero-row {
     height: 100%;
 }
 
