@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calc-container {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 600px;
+
+}
+
+.output, .operations,
+.high-nums, .mid-nums, .low-nums {
+    display: flex;
+}
+
+.nums-container {
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+}
+
+.output, .operations {
+    flex: 1;
+}
+
+.output p, .operations button,
+.high-nums button, .mid-nums button, .low-nums button {
+    flex: auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.high-nums, .mid-nums, .low-nums {
+    height: 100%;
+}
+
+.operations button {
+    width: 100px;
+}
+
+.output p {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
