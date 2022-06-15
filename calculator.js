@@ -15,7 +15,6 @@ function divide(a, b) {
     return a / b;
 }
 
-let count = 0;
 function operate(operation, a, b) {
     
 }
@@ -29,11 +28,12 @@ btnRows.forEach(rows => {
 
     btnRow.forEach(button => {
         button.addEventListener('click', function(e) {
-            decipherClicks(e.target.id);
+            decipherClicks(e.target.className);
         });
     });
 });
 
-function decipherClicks(id) {
-    console.log('decipherClicks: ' + id);
+let count = 0;
+function decipherClicks(className) {
+    console.log('decipherClicks: ' + className);
 }
