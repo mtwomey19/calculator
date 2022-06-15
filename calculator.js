@@ -18,17 +18,21 @@ let operation = '';
 let output = 0;
 
 function decipherClicks(className, id) {
+    let screen = document.getElementById('output');
     if (className !== 'op' && operation === '') {
         num1 += document.querySelector(`#${id}`).textContent;
+        screen.innerText = num1;
     } if (num1 !== '' && className === 'op' && id !== 'equal') {
         operation = document.querySelector(`#${id}`).textContent;
     } if (className !== 'op' && operation !== '') {
         num2 += document.querySelector(`#${id}`).textContent;
+        screen.textContent = num2;
     } if (id === 'equal' && num2 !== '') {
         console.log(num1);
         console.log(operation);
         console.log(num2);
         output = operate(operation, num1, num2);
+        screen.textContent = output;
         console.log(output);
         num1 = output; 
         num2 = '';
@@ -44,7 +48,6 @@ function operate(operation, a, b) {
         return multiply(a, b);
     } return divide(a, b);    
 }
-
 
 function add(a, b) {
     return (+a) + (+b);

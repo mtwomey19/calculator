@@ -55,10 +55,11 @@ body {
     width: 100px;
 }
 
-.output p {
+.output {
     display: flex;
-    align-items: center;
     justify-content: flex-end;
+    align-items: center;
+    border: 1px solid black;
     padding-right: 30px;
 }
 
