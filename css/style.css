@@ -26,7 +26,7 @@ body {
 }
 
 .output, .operations,
-.high-nums, .mid-nums, .low-nums, .zero-row {
+.high-nums, .mid-nums, .low-nums, .btm-row {
     display: flex;
     height: 100px;
 }
@@ -38,13 +38,13 @@ body {
 }
 
 .output p, .operations button,
-.high-nums button, .mid-nums button, .low-nums button, .zero-row button {
+.high-nums button, .mid-nums button, .low-nums button, .btm-row button {
     flex: auto;
     border: 1px solid black;
     text-align: center;
 }
 
-.high-nums, .mid-nums, .low-nums, .zero-row {
+.high-nums, .mid-nums, .low-nums, .btm-row {
     height: 100%;
 }
 
@@ -58,5 +58,9 @@ body {
     align-items: center;
     border: 1px solid black;
     padding-right: 30px;
+}
+
+.btm-row button {
+    width: 200px;
 }
 

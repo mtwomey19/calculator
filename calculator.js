@@ -24,25 +24,60 @@ function decipherClicks(className, id) {
         num1 += document.querySelector(`#${id}`).textContent;
         screen.innerText = num1;
     } 
-    if (num1 !== '' && className === 'op' && id !== 'equal') {
+    if (num1 !== '' && className === 'op' && id !== 'equal' && id !== 'del') {
         operation.push(document.querySelector(`#${id}`).textContent);
     } 
     if (className !== 'op' && operation.length !== 0) {
         num2 += document.querySelector(`#${id}`).textContent;
         screen.textContent = num2;
     } 
-    if ((id === 'equal' && num2 !== '') || (num1 !== '' && num2 !== '' && className === 'op')) {
+    if ((id === 'equal' && num2 !== '') || (num1 !== '' && num2 !== '' && className === 'op' && id !== 'del')) {
         output = operate(operation[0], num1, num2);
         screen.textContent = output;
         num1 = output;
         operation.shift(); 
         num2 = '';
-    } if (id === 'clear') {
+    } 
+    if (id === 'clear') {
         num1 = '';
         num2 = '';
         operation = [];
         output = 0;
         screen.textContent = '';
+    }
+    console.log(operation);
+    if (id === 'del' && operation.length === 0 && num1 !== '') {
+        console.log('a');
+        num1 = backSpace(num1, num2, operation);
+        screen.textContent = num1;
+    }
+    if (id === 'del' && operation.length === 1 && num2 === '') {
+        console.log('b');
+        operation = backSpace(num1, num2, operation);
+        screen.textContent = num1;
+    }
+    if (id === 'del' && num2 !== '') {
+        num2 = backSpace(num1, num2, operation);
+        screen.textContent = num2;
+    }
+
+}
+
+function backSpace(num1, num2, operation) {
+    if (operation.length === 0 && num1 !== '') {
+        let num1Array = Array.from(num1);
+        num1Array.pop()
+        return num1Array.join('');
+    }
+    if (operation.length === 1 && num2 === '') {
+        operation.pop();
+        return operation;
+    }
+    if (num2 !== '') {
+        let num2Array = Array.from(num2);
+        num2Array.pop();
+        console.log(num2Array.join(''));
+        return num2Array.join('');
     }
 }
 
@@ -69,7 +104,5 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return (Math.round((a / b) * 10_000)) / 10_000;
+    return Math.round((a / b) * 10_000) / 10_000;
 }
-
-
