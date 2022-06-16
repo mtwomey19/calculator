@@ -1,6 +1,11 @@
-
 const buttons = document.querySelector('.buttons');
 const btnRows = Array.from(buttons.children);
+
+let num1 = '';
+let num2 = '';
+let operators = [];
+let output = 0;
+let displayScreen = document.getElementById('output');
 
 btnRows.forEach(rows => {
     let btnRow = Array.from(rows.children);
@@ -12,74 +17,40 @@ btnRows.forEach(rows => {
     });
 });
 
-let num1 = '';
-let num2 = '';
-let operation = [];
-let output = 0;
-let displayScreen = document.getElementById('output');
-
 function decipherClicks(className, id) {
-    // let screen = document.getElementById('output');
-
-    if (className !== 'op' && operation.length === 0) {
+    if (className !== 'op' && operators.length === 0) {
         appendNum1(id);
         updateDisplay(num1);
-        // num1 += document.querySelector(`#${id}`).textContent;
-        // screen.innerText = num1;
-    } 
-    if (num1 !== '' && className === 'op' && id !== 'equal' && id !== 'del') {
-        operation.push(document.querySelector(`#${id}`).textContent);
-    } 
-    if (className !== 'op' && operation.length !== 0) {
-        num2 += document.querySelector(`#${id}`).textContent;
-        screen.textContent = num2;
-    } 
-    if ((id === 'equal' && num2 !== '') || (num1 !== '' && num2 !== '' && className === 'op' && id !== 'del')) {
-        output = operate(operation[0], num1, num2);
-        screen.textContent = output;
-        num1 = output;
-        operation.shift(); 
-        num2 = '';
-    } 
-    if (id === 'clear') {
-        num1 = '';
-        num2 = '';
-        operation = [];
-        output = 0;
-        screen.textContent = '';
+    } else if (num1 !== '' && className === 'op' && id !== 'equal' && id !== 'del') {
+        appendOperator(id);
+    } else if (className !== 'op' && operators.length !== 0) {
+        appendNum2(id);
+        updateDisplay(num2);
+    } else if ((id === 'equal' && num2 !== '') || (num1 !== '' && num2 !== '' && className === 'op' && id !== 'del')) {
+        output = operate(operators[0], num1, num2);
+        updateDisplay(output);
+        postSolve();
+    } else if (id === 'clear') {
+        clear();
+    } else if (id === 'del') {
+        updateDisplay(backSpace());
     }
-    if (id === 'del' && operation.length === 0 && num1 !== '') {
-        console.log('a');
-        num1 = backSpace(num1, num2, operation);
-        screen.textContent = num1;
-    }
-    if (id === 'del' && operation.length === 1 && num2 === '') {
-        console.log('b');
-        operation = backSpace(num1, num2, operation);
-        screen.textContent = num1;
-    }
-    if (id === 'del' && num2 !== '') {
-        num2 = backSpace(num1, num2, operation);
-        screen.textContent = num2;
-    }
-
 }
 
-function backSpace(num1, num2, operation) {
-    if (operation.length === 0 && num1 !== '') {
+function backSpace() {
+    if (operators.length === 0 && num1 !== '') {
         let num1Array = Array.from(num1);
         num1Array.pop()
-        return num1Array.join('');
-    }
-    if (operation.length === 1 && num2 === '') {
-        operation.pop();
-        return operation;
-    }
-    if (num2 !== '') {
+        num1 = num1Array.join('');
+        return num1;
+    } else if (operators.length === 1 && num2 === '') {
+        operators.pop();
+        return operators;
+    } else if (num2 !== '') {
         let num2Array = Array.from(num2);
         num2Array.pop();
-        console.log(num2Array.join(''));
-        return num2Array.join('');
+        num2 = num2Array.join('');
+        return num2;
     }
 }
 
@@ -87,17 +58,30 @@ function appendNum1(id) {
     num1 += document.querySelector(`#${id}`).textContent;
 }
 
-function appendNum2() {
+function appendNum2(id) {
+    num2 += document.querySelector(`#${id}`).textContent;
+}
 
+function appendOperator(id) {
+    operators.push(document.querySelector(`#${id}`).textContent);
+}
+
+function postSolve() {
+    operators.shift(); 
+    num1 = output;
+    num2 = '';
 }
 
 function updateDisplay(number) {
     displayScreen.innerText = number;
-
 }
 
 function clear() {
-
+    num1 = '';
+    num2 = '';
+    operators = [];
+    output = 0;
+    displayScreen.textContent = '';
 }
 
 function operate(operation, a, b) {
