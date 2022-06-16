@@ -3,12 +3,16 @@
     padding: 0;
     border: 0;
     box-sizing: border-box;
+    border-radius: 9px;
 }
 
 body {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background-color: white;
 }
 
 .calc-container {
@@ -16,7 +20,8 @@ body {
     flex-direction: column;
     width: 600px;
     height: 600px;
-
+    background-color: black;
+    border: 3px solid black;
 }
 
 .buttons {
@@ -46,6 +51,7 @@ body {
 
 .high-nums, .mid-nums, .low-nums, .btm-row {
     height: 100%;
+
 }
 
 .operations button {
@@ -58,9 +64,40 @@ body {
     align-items: center;
     border: 1px solid black;
     padding-right: 30px;
+    font-size: 54px;
+    font-weight: bold;
+    background-color: #1F3095;
+    color: #FFFFFF
+}
+
+.operations button {
+    background-color: #96577F;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.high-nums button, .mid-nums button, .low-nums button, .btm-row button {
+    background-color: #FA8E44;
+    font-size: 30px;;
 }
 
 .btm-row button {
     width: 200px;
 }
 
+.operations button:hover, .high-nums button:hover, .mid-nums button:hover,
+.low-nums button:hover, .btm-row button:hover {
+    border: 1.5px solid white;
+} 
+
+#clear, #del {
+    font-weight: 100;
+}
+
+#dec, #equal {
+    font-weight: bold;
+}
+
+#equal {
+    background-color: #96577F;
+}
