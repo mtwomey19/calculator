@@ -18,21 +18,22 @@ btnRows.forEach(rows => {
 });
 
 function decipherClicks(className, id) {
+    console.log(id);
     if (className !== 'op' && operators.length === 0) {
         appendNum1(id);
         updateDisplay(num1);
-    } else if (num1 !== '' && className === 'op' && id !== 'equal' && id !== 'del') {
+    } if (num1 !== '' && className === 'op' && id !== 'equal' && id !== 'del') {
         appendOperator(id);
-    } else if (className !== 'op' && operators.length !== 0) {
+    } if (className !== 'op' && operators.length !== 0) {
         appendNum2(id);
         updateDisplay(num2);
-    } else if ((id === 'equal' && num2 !== '') || (num1 !== '' && num2 !== '' && className === 'op' && id !== 'del')) {
+    } if ((id === 'equal' && num2 !== '') || (num1 !== '' && num2 !== '' && className === 'op' && id !== 'del')) {
         output = operate(operators[0], num1, num2);
         updateDisplay(output);
         postSolve();
-    } else if (id === 'clear') {
+    } if (id === 'clear') {
         clear();
-    } else if (id === 'del') {
+    } if (id === 'del') {
         updateDisplay(backSpace());
     }
 }
@@ -45,7 +46,7 @@ function backSpace() {
         return num1;
     } else if (operators.length === 1 && num2 === '') {
         operators.pop();
-        return operators;
+        return num1;
     } else if (num2 !== '') {
         let num2Array = Array.from(num2);
         num2Array.pop();
@@ -73,7 +74,7 @@ function postSolve() {
 }
 
 function updateDisplay(number) {
-    displayScreen.innerText = number;
+    displayScreen.textContent = number;
 }
 
 function clear() {
