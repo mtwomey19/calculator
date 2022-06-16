@@ -16,13 +16,16 @@ let num1 = '';
 let num2 = '';
 let operation = [];
 let output = 0;
+let displayScreen = document.getElementById('output');
 
 function decipherClicks(className, id) {
-    let screen = document.getElementById('output');
+    // let screen = document.getElementById('output');
 
     if (className !== 'op' && operation.length === 0) {
-        num1 += document.querySelector(`#${id}`).textContent;
-        screen.innerText = num1;
+        appendNum1(id);
+        updateDisplay(num1);
+        // num1 += document.querySelector(`#${id}`).textContent;
+        // screen.innerText = num1;
     } 
     if (num1 !== '' && className === 'op' && id !== 'equal' && id !== 'del') {
         operation.push(document.querySelector(`#${id}`).textContent);
@@ -45,7 +48,6 @@ function decipherClicks(className, id) {
         output = 0;
         screen.textContent = '';
     }
-    console.log(operation);
     if (id === 'del' && operation.length === 0 && num1 !== '') {
         console.log('a');
         num1 = backSpace(num1, num2, operation);
@@ -79,6 +81,23 @@ function backSpace(num1, num2, operation) {
         console.log(num2Array.join(''));
         return num2Array.join('');
     }
+}
+
+function appendNum1(id) {
+    num1 += document.querySelector(`#${id}`).textContent;
+}
+
+function appendNum2() {
+
+}
+
+function updateDisplay(number) {
+    displayScreen.innerText = number;
+
+}
+
+function clear() {
+
 }
 
 function operate(operation, a, b) {
