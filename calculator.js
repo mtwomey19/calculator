@@ -18,7 +18,6 @@ btnRows.forEach(rows => {
 });
 
 function decipherClicks(className, id) {
-    console.log(id);
     if (className !== 'op' && operators.length === 0) {
         appendNum1(id);
         updateDisplay(num1);
